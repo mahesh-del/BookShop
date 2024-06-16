@@ -1,61 +1,94 @@
 <div class="register py-5 text-center flex-inline">
     <section class="pb-3">
-        <h3>Join the Library</h3>
+        <h3>THE BOOKSTORE</h3>
         @if(formData().customerId)
         {
             <p>ID:{{formData().customerId}}</p>
         }
     </section>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-        <div class="row g-3">
-            <p-inputGroup class="col-12 col-md-6">
-                <p-inputGroupAddon>
-                    <i class="pi pi-user"></i>
-                </p-inputGroupAddon>
-                <input pInputText placeholder="First Name" formControlName="firstName" />
-            </p-inputGroup>
-            <p-inputGroup class="col-12 col-md-6">
-                <p-inputGroupAddon>
-                    <i class="pi pi-user"></i>
-                </p-inputGroupAddon>
-                <input pInputText placeholder="Last Name" formControlName="lastName" />
-            </p-inputGroup>
-            <p-inputGroup class="col-12 col-md-6">
-                <p-inputGroupAddon>
-                    <i class="pi pi-envelope"></i>
-                </p-inputGroupAddon>
-                <input pInputText placeholder="Email" formControlName="email" />
-            </p-inputGroup>
-            <p-inputGroup class="col-12 col-md-6">
-                <p-inputGroupAddon>
-                    <i class="pi pi-key"></i>
-                </p-inputGroupAddon>
-                <input pInputText placeholder="Password" formControlName="password" type="password" />
-            </p-inputGroup>
-            <p-inputGroup class="col-12">
-                <p-inputGroupAddon>
-                    <i class="pi pi-address-book"></i>
-                </p-inputGroupAddon>
-                <textarea pInputText placeholder="Address" formControlName="address"></textarea>
-            </p-inputGroup>
-            <p-inputGroup class="col-12">
-                <p-inputGroupAddon>
-                    <i class="pi pi-truck"></i>
-                </p-inputGroupAddon>
-                <input pInputText placeholder="City" formControlName="city" />
-            </p-inputGroup>
-            <div class="role flex text-start">
-                <p-checkbox formControlName="role" [binary]="true" inputId="binary" class="pe-2" />
-                <label for="role">Register as Admin</label>
-            </div>
-            <div class="submit">
-                <p-toast
-                    [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' }, '640px': { width: '100%', bottom: '10px' } }" />
-                <button pButton pRipple [disabled]="" label="Register Now" type="submit" [raised]="true"
-                    class="p-button-success rounded-2 col-12">
-                </button>
-            </div>
-        </div>
-    </form>
-    <p class="pt-3">Already have an account?&nbsp;<span><a href="#">Login</a></span></p>
+    <p-tabView>
+        <p-tabPanel header="Register">
+            <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" class="w-lg-50 w-100 text-center mx-0 mx-lg-auto">
+                <div class="row g-3">
+                    <p-inputGroup class="col-12 col-md-6">
+                        <p-inputGroupAddon>
+                            <i class="pi pi-user"></i>
+                        </p-inputGroupAddon>
+                        <input pInputText placeholder="First Name" formControlName="firstName" />
+                    </p-inputGroup>
+                    <p-inputGroup class="col-12 col-md-6">
+                        <p-inputGroupAddon>
+                            <i class="pi pi-user"></i>
+                        </p-inputGroupAddon>
+                        <input pInputText placeholder="Last Name" formControlName="lastName" />
+                    </p-inputGroup>
+                    <p-inputGroup class="col-12 col-md-6">
+                        <p-inputGroupAddon>
+                            <i class="pi pi-envelope"></i>
+                        </p-inputGroupAddon>
+                        <input pInputText placeholder="Email" formControlName="email" />
+                    </p-inputGroup>
+                    <p-inputGroup class="col-12 col-md-6">
+                        <p-inputGroupAddon>
+                            <i class="pi pi-key"></i>
+                        </p-inputGroupAddon>
+                        <input pInputText placeholder="Password" formControlName="password" type="password" />
+                    </p-inputGroup>
+                    <p-inputGroup class="col-12">
+                        <p-inputGroupAddon>
+                            <i class="pi pi-address-book"></i>
+                        </p-inputGroupAddon>
+                        <textarea pInputText placeholder="Address" formControlName="address"></textarea>
+                    </p-inputGroup>
+                    <p-inputGroup class="col-12">
+                        <p-inputGroupAddon>
+                            <i class="pi pi-truck"></i>
+                        </p-inputGroupAddon>
+                        <input pInputText placeholder="City" formControlName="city" />
+                    </p-inputGroup>
+                    <div class="role flex text-start">
+                        <p-checkbox formControlName="role" [binary]="true" inputId="binary" class="pe-2" />
+                        <label for="role">Register as Admin</label>
+                    </div>
+                    <div class="submit">
+                        <p-toast
+                            [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' }, '640px': { width: '100%', bottom: '10px' } }" />
+                        <button pButton pRipple [disabled]="" label="Register Now" type="submit" [raised]="true"
+                            class="p-button-success rounded-2 col-12">
+                        </button>
+                    </div>
+                </div>
+            </form>
+            <p class="pt-3">Already have an account?&nbsp;<span><a href="#">Login</a></span></p>
+        </p-tabPanel>
+        <p-tabPanel header="Login">
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="w-lg-25 w-xl-25 w-xxl-25 w-100 text-center mx-0 mx-lg-auto">
+                <div class="row g-3">
+                    <p-inputGroup class="col-12">
+                        <p-inputGroupAddon>
+                            <i class="pi pi-user"></i>
+                        </p-inputGroupAddon>
+                        <input pInputText placeholder="Email" formControlName="email" />
+                    </p-inputGroup>
+                    <p-inputGroup class="col-12">
+                        <p-inputGroupAddon>
+                            <i class="pi pi-key"></i>
+                        </p-inputGroupAddon>
+                        <input pInputText placeholder="Password" formControlName="password" type="password" />
+                    </p-inputGroup>
+                    <div class="remember flex text-start align-self-center">
+                        <p-checkbox formControlName="remember" binary="true" inputId="remember" class="pe-2" />
+                        <label for="role">Remember Me</label>
+                    </div>
+                </div>
+                <div class="submit pt-3">
+                    <p-toast
+                        [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' }, '640px': { width: '100%', bottom: '10px' } }" />
+                    <button pButton pRipple [disabled]="" label="Login" type="submit" [raised]="true"
+                        class="p-button-success rounded-2 col-12">
+                    </button>
+                </div>
+            </form>
+        </p-tabPanel>
+    </p-tabView>
 </div>

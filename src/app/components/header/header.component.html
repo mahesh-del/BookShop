@@ -1,1 +1,17 @@
-<p-menubar [model]="items" />
+<p-menubar [model]="items">
+    <ng-template pTemplate="start">
+        <h1 class="ps-2">BS</h1>
+    </ng-template>
+    <ng-template pTemplate="end">
+        <div class="flex gap-3" style="display: flex;justify-content: center;align-items: center;">
+            <i class="pi pi-heart" style="font-size: 1.5rem" (click)="wishList()"></i>
+            <i class="pi pi-shopping-cart" style="font-size: 1.5rem" (click)="cart()"></i>
+            <p-iconField iconPosition="left">
+                <p-inputIcon styleClass="pi pi-search" />
+                <input type="text" pInputText placeholder="Search" />
+            </p-iconField>
+            <p-avatar image="https://primefaces.org/cdn/primeng/images/demo/avatar/asiyajavayant.png" styleClass="mr-2"
+                size="large" shape="circle" />
+        </div>
+    </ng-template>
+</p-menubar>

@@ -1,1 +1,11 @@
 @import "primeicons/primeicons.css";
+i,pi-heart{
+    content: "\e984";
+    border: 2px solid;
+    padding: 0.5rem;
+    border-radius: 50%;
+    cursor: pointer;
+}
+i:hover{
+    border-color: rgb(25, 112, 220);
+}

@@ -1,0 +1,33 @@
+<div class="text-left mt-4">
+    <div class="row">
+        @for(book of books;track book.title)
+        {
+        <div class="col">
+            <p-card header="{{book.title}}" subheader="{{book.author}}">
+                <ng-template pTemplate="header">
+                    <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
+                </ng-template>
+                <p class="m-0">
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi consectetur ipsam quos maiores
+                    obcaecati labore inventore optio quidem eos quam sit eius cupiditate corrupti omnis ipsa quo,
+                    sapiente repellendus a.
+                </p>
+                <div class="chip my-3">
+                    <p-chip label="{{book.genre}}" />
+                </div>
+                <div class="price">
+                    <h3>₹{{book.price}}</h3>
+                </div>
+                <ng-template pTemplate="footer" class="pt-0">
+                    <div class="flex gap-3" style="display: flex;justify-content: space-between;align-items: center;">
+                            <p-button label="Add to cart" severity="primary" class="rounded-2" styleClass="w-full" icon="pi pi-shopping-cart"/>
+                            <p-button label="Save to wishlist" class="w-full" severity="secondary" styleClass="w-full" icon="pi pi-heart"/>
+                    </div>
+                </ng-template>
+            </p-card>
+        </div>
+        } @empty{
+            <div>No Books Avaialable</div>
+        }
+    </div>
+</div>
