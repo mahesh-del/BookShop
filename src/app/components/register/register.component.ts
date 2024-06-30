@@ -13,10 +13,12 @@ import { UserService } from '../../shared/api/user.service';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
 import { TabViewModule } from 'primeng/tabview';
+import { ChipModule } from 'primeng/chip';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, InputGroupModule, InputGroupAddonModule, InputTextModule,TabViewModule, ReactiveFormsModule, PasswordModule, CheckboxModule, ButtonModule, ToastModule, InputSwitchModule],
+  imports: [FormsModule, ChipModule ,InputGroupModule, InputGroupAddonModule, InputTextModule,TabViewModule, ReactiveFormsModule, PasswordModule, CheckboxModule, ButtonModule, ToastModule, InputSwitchModule],
   providers: [MessageService],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
@@ -27,6 +29,7 @@ export class RegisterComponent {
   private api = inject(AdminService)
   private userApi = inject(UserService)
   private messageService = inject(MessageService)
+  private route=inject(Router)
   formData: WritableSignal<Admin> = signal(
     { "firstName": "", "lastName": "", "email": "", "password": "", "address": "", "city": "", "role": "" }
   )
@@ -41,8 +44,8 @@ export class RegisterComponent {
   })
 
   loginForm = new FormGroup({
-    email: new FormControl("", [Validators.required, Validators.email]),
-    password: new FormControl("", [Validators.required, Validators.minLength(8)]),
+    email: new FormControl(this.api.getEmail(), [Validators.required, Validators.email]),
+    password: new FormControl(this.api.getPassword(), [Validators.required, Validators.minLength(8)]),
     remember: new FormControl(false)
   })
 
@@ -86,7 +89,14 @@ export class RegisterComponent {
     this.api.adminLogin(loggedData).subscribe({
       next:(data)=>{
         console.log("Token",data)
+        this.api.setAdminToken(data);
         this.showSuccess('Login Success')
+        this.route.navigateByUrl('/store')
+        if(this.checked)
+          {
+            this.api.setEmail(loggedData.email);
+            this.api.setPassword(loggedData.password);
+          }
       },
       error:(err)=>{
         console.log('error',err.error)

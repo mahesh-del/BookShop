@@ -24,6 +24,7 @@ export class StoreComponent {
     this.booksApi.getBooks().subscribe({
       next:(data)=>{
         this.books=data
+        console.log(data)
       },
       error:(err)=>{
         this.error=err.statusText

@@ -1,33 +1,24 @@
-<div class="text-left mt-4">
-    <div class="row">
-        @for(book of books;track book.title)
-        {
-        <div class="col">
-            <p-card header="{{book.title}}" subheader="{{book.author}}">
-                <ng-template pTemplate="header">
-                    <img alt="Card" src="https://primefaces.org/cdn/primeng/images/card-ng.jpg" />
-                </ng-template>
-                <p class="m-0">
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi consectetur ipsam quos maiores
-                    obcaecati labore inventore optio quidem eos quam sit eius cupiditate corrupti omnis ipsa quo,
-                    sapiente repellendus a.
-                </p>
-                <div class="chip my-3">
-                    <p-chip label="{{book.genre}}" />
-                </div>
-                <div class="price">
-                    <h3>₹{{book.price}}</h3>
-                </div>
-                <ng-template pTemplate="footer" class="pt-0">
-                    <div class="flex gap-3" style="display: flex;justify-content: space-between;align-items: center;">
-                            <p-button label="Add to cart" severity="primary" class="rounded-2" styleClass="w-full" icon="pi pi-shopping-cart"/>
-                            <p-button label="Save to wishlist" class="w-full" severity="secondary" styleClass="w-full" icon="pi pi-heart"/>
+<div class="row gap-2 justify-content-center mt-2">
+    @for(book of books;track book.title)
+    {
+    <div class="col-lg-5">
+        <div class="card">
+            <img width="100" src="https://cdn.pixabay.com/photo/2024/06/16/16/16/ai-generated-8833738_1280.jpg"
+                class="card-img-top" alt="...">
+            <div class="card-body">
+                <h5 class="card-title">{{book.title}}</h5>
+                <p class="card-text">{{book.author}}</p>
+                <p-chip label="{{book.genre}}" />
+                <div class="align-items-center mt-2">
+                    <h4>₹{{book.price}}</h4>
+                    <div class="d-lg-flex justify-content-between w-100">
+                        <button class="btn btn-primary w-lg-50 w-100 mb-2 mb-lg-0"><i class="pi pi-cart-plus"></i> Add to Cart</button>
+                        <button class="btn btn-warning w-lg-50 w-100"><i class="pi pi-shopping-bag"></i> Buy now</button>
                     </div>
-                </ng-template>
-            </p-card>
+                </div>
+
+            </div>
         </div>
-        } @empty{
-            <div>No Books Avaialable</div>
-        }
     </div>
+    }
 </div>
