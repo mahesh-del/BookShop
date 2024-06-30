@@ -4,3 +4,11 @@
 button{
     box-shadow: none;
 }
+::ng-deep p-tabView a{
+    text-decoration: none;
+}
+::ng-deep .p-tabview-nav-container .p-tabview-nav-content .p-tabview-nav{
+    width: 50%;
+    justify-content: center;
+    padding: 0;
+}
