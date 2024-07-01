@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-landing',
@@ -9,4 +10,8 @@ import { Component } from '@angular/core';
 })
 export class LandingComponent {
 
+  private route=inject(Router)
+  redirect(){
+    this.route.navigateByUrl('/store')
+  }
 }
