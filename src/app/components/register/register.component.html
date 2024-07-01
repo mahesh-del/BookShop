@@ -3,7 +3,7 @@
         <h3>THE BOOKSTORE</h3>
         @if(formData().customerId)
         {
-            <p>ID:{{formData().customerId}}</p>
+        <p>ID:{{formData().customerId}}</p>
         }
     </section>
     <p-tabView>
@@ -62,13 +62,17 @@
             <p class="pt-3">Already have an account?&nbsp;<span><a href="#">Login</a></span></p>
         </p-tabPanel>
         <p-tabPanel header="Login">
-            <form [formGroup]="loginForm" (ngSubmit)="onLogin()" class="w-lg-25 w-xl-25 w-xxl-25 w-100 text-center mx-0 mx-lg-auto">
+            <div class="mb-2 text-start">
+                <p-dropdown [options]="roles" [(ngModel)]="userType" optionLabel="role" placeholder="Select userType" optionValue="role"/>
+            </div>
+            <form [formGroup]="loginForm" (ngSubmit)="onLogin()"
+                class="w-lg-25 w-xl-25 w-xxl-25 w-100 text-center mx-0 mx-lg-auto">
                 <div class="row g-3">
                     <p-inputGroup class="col-12">
                         <p-inputGroupAddon>
                             <i class="pi pi-user"></i>
                         </p-inputGroupAddon>
-                        <input pInputText placeholder="Email" formControlName="email" />
+                        <input pInputText placeholder="Email" formControlName="email"/>
                     </p-inputGroup>
                     <p-inputGroup class="col-12">
                         <p-inputGroupAddon>
@@ -84,7 +88,7 @@
                 <div class="submit pt-3">
                     <p-toast
                         [breakpoints]="{ '920px': { width: '100%', right: '0', left: '0' }, '640px': { width: '100%', bottom: '10px' } }" />
-                    <button pButton pRipple [disabled]="" label="Login" type="submit" [raised]="true"
+                    <button pButton pRipple label="Login" type="submit" [raised]="true"
                         class="p-button-success rounded-2 col-12">
                     </button>
                 </div>
