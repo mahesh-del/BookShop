@@ -15,19 +15,24 @@ import { MessageService } from 'primeng/api';
 import { TabViewModule } from 'primeng/tabview';
 import { ChipModule } from 'primeng/chip';
 import { Router } from '@angular/router';
+import { DropdownModule } from 'primeng/dropdown';
+import { CommonService } from '../../shared/api/common.service';
 @Component({
   selector: 'app-register',
   standalone: true,
-  imports: [FormsModule, ChipModule ,InputGroupModule, InputGroupAddonModule, InputTextModule,TabViewModule, ReactiveFormsModule, PasswordModule, CheckboxModule, ButtonModule, ToastModule, InputSwitchModule],
+  imports: [DropdownModule,FormsModule, ChipModule ,InputGroupModule, InputGroupAddonModule, InputTextModule,TabViewModule, ReactiveFormsModule, PasswordModule, CheckboxModule, ButtonModule, ToastModule, InputSwitchModule],
   providers: [MessageService],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss'
 })
 export class RegisterComponent {
+  roles:any[]=[{role:"Admin"},{role:"User"}]
+  userType='';
   checked = false;
   error = '';
   private api = inject(AdminService)
   private userApi = inject(UserService)
+  private commonApi=inject(CommonService)
   private messageService = inject(MessageService)
   private route=inject(Router)
   formData: WritableSignal<Admin> = signal(
@@ -52,6 +57,7 @@ export class RegisterComponent {
   onSubmit() {
     let formData = this.registerForm.value;
     this.setData(formData);
+    this.registerForm.reset();
   }
 
   setData(obj: Admin) {
@@ -63,7 +69,7 @@ export class RegisterComponent {
           this.formData.set(data)
         },
         error:err=>{
-          this.error=err.statusText
+          this.error=err.error
           this.showError(this.error)
         }
       })
@@ -86,23 +92,55 @@ export class RegisterComponent {
   {
     this.checked=this.loginForm.get('remember')?.value ? true : false
     let loggedData=this.loginForm.value;
-    this.api.adminLogin(loggedData).subscribe({
-      next:(data)=>{
-        console.log("Token",data)
-        this.api.setAdminToken(data);
-        this.showSuccess('Login Success')
-        this.route.navigateByUrl('/store')
-        if(this.checked)
-          {
-            this.api.setEmail(loggedData.email);
-            this.api.setPassword(loggedData.password);
+    if(this.userType.toString().toLowerCase()==="user")
+      {
+        this.userApi.userlogin(loggedData).subscribe({
+          next:(data)=>{
+            console.log("hello",data)
+            if(data.customer!=null)
+              {
+                this.commonApi.setRole('user');
+              } else {
+                this.commonApi.setRole('admin');
+              }
+            this.api.setAdminToken(data.token);
+            this.showSuccess('Login Success')
+            this.route.navigateByUrl('/store')
+            if(this.checked)
+              {
+                this.api.setEmail(loggedData.email);
+                this.api.setPassword(loggedData.password);
+              }
+          },
+          error:(err)=>{
+            this.showError(err.error)
           }
-      },
-      error:(err)=>{
-        console.log('error',err.error)
-        this.showError(err.error)
+        })
       }
-    })
+      else{
+        this.api.adminLogin(loggedData).subscribe({
+          next:(data)=>{
+            console.log("hello",data)
+            if(data.admin!=null)
+              {
+                this.commonApi.setRole('admin');
+              } else {
+                this.commonApi.setRole('user');
+              }
+            this.api.setAdminToken(data.token);
+            this.showSuccess('Login Success')
+            this.route.navigateByUrl('/store')
+            if(this.checked)
+              {
+                this.api.setEmail(loggedData.email);
+                this.api.setPassword(loggedData.password);
+              }
+          },
+          error:(err)=>{
+            this.showError(err.error)
+          }
+        })
+      }
   }
   showSuccess(val:string) {
     this.messageService.add({ severity: 'success', summary: 'Success', detail:val });

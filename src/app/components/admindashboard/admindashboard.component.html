@@ -1,0 +1,44 @@
+<p-dialog header="Add Book" [(visible)]="displayModal" [responsive]="true" [modal]="true" [style]="{ 'max-width': '600px' }">
+    <form [formGroup]="addBook" (ngSubmit)="submit()">
+      <div class="p-fluid">
+        <div class="p-field">
+          <label for="title">Title</label>
+          <input id="title" type="text" pInputText formControlName="title" class="form-control" />
+        </div>
+        <div class="p-field">
+          <label for="author">Author</label>
+          <input id="author" type="text" pInputText formControlName="author" class="form-control" />
+        </div>
+        <div class="p-field">
+          <label for="genre">Genre</label>
+          <input id="genre" type="text" pInputText formControlName="genre" class="form-control" />
+        </div>
+        <div class="p-field">
+          <label for="price">Price</label>
+          <input id="price" type="number" pInputText formControlName="price" class="form-control" />
+        </div>
+        <div class="p-field">
+          <label for="stock">Stock</label>
+          <input id="stock" type="number" pInputText formControlName="stock" class="form-control" />
+        </div>
+        <div class="p-field">
+          <label for="status">Status</label>
+          <input id="status" type="text" pInputText formControlName="status" class="form-control" />
+        </div>
+      </div>
+  
+      <div class="modal-footer mt-3 justify-content-between">
+        <button type="button" pButton label="Cancel" (click)="hideDialog()" class="btn btn-secondary"></button>
+        <button type="submit" pButton label="Save" class="btn btn-primary"></button>
+      </div>
+    </form>
+  </p-dialog>
+  <button type="button" pButton label="Add Book" icon="pi pi-external-link" (click)="showDialog()" class="btn btn-primary"></button>
+  
+<section>
+    @for (item of books; track $index) {
+        <div class="book">
+            {{item.title}}
+        </div>
+    }
+</section>

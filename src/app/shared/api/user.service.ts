@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../models';
+import { Credentials, User } from '../models';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -13,5 +13,10 @@ export class UserService {
   userRegister(obj:User):Observable<User>
   {
     return this.http.post("http://localhost:8080/customer/register",obj)
+  }
+
+  userlogin(val:Credentials):Observable<any>
+  {
+    return this.http.post("http://localhost:8080/customer/login",val)
   }
 }

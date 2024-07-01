@@ -1,9 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, WritableSignal, inject, signal } from '@angular/core';
 import { BooksService } from '../../shared/api/books.service';
 import { Book } from '../../shared/models';
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { ChipModule } from 'primeng/chip';
+import { CommonService } from '../../shared/api/common.service';
 
 @Component({
   selector: 'app-store',
@@ -14,17 +15,19 @@ import { ChipModule } from 'primeng/chip';
 })
 export class StoreComponent {
   private booksApi=inject(BooksService)
+  private commonApi=inject(CommonService)
+  role:WritableSignal<string>=signal('');
   books:Book[]=[]
   error: any;
   ngOnInit()
   {
+    this.role.set(this.commonApi.getRole())
     this.getBooks()
   }
   getBooks(){
     this.booksApi.getBooks().subscribe({
       next:(data)=>{
         this.books=data
-        console.log(data)
       },
       error:(err)=>{
         this.error=err.statusText

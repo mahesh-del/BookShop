@@ -44,4 +44,9 @@ export class HeaderComponent {
 
   }
 
+  logout()
+  {
+    this.adminApi.clearToken();
+  }
+
 }

@@ -58,4 +58,9 @@ export class AdminService {
     return this.localStorage?.getItem('admintoken')
   }
 
+  clearToken()
+  {
+    return this.localStorage?.removeItem('admintoken')
+  }
+
 }
