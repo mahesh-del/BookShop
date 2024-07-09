@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpBackend, HttpClient } from '@angular/common/http';
 import { Inject, Injectable, inject } from '@angular/core';
 import { Admin, Credentials } from '../models';
 import { Observable } from 'rxjs';
@@ -9,7 +9,8 @@ import { DOCUMENT } from '@angular/common';
 })
 export class AdminService {
 
-  constructor(@Inject(DOCUMENT) private document: Document) {
+  constructor(@Inject(DOCUMENT) private document: Document,private handler: HttpBackend) {
+    this.http = new HttpClient(handler);
   }
 
   localStorage = this.document.defaultView?.localStorage;
