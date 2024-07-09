@@ -22,16 +22,16 @@ export interface User {
 
 export interface Credentials {
   email?: string | null,
-  password?: string |null,
-  remember?:boolean | null
+  password?: string | null,
+  remember?: boolean | null
 }
 export interface Book {
-  "bookId": number,
-  "title": string,
-  "author": string,
-  "genre": string,
-  "price": number,
-  "stock": number
+  bookId?: any;
+  title?: string | null,
+  author?: string | null,
+  genre?: string | null,
+  price?: string | null,
+  stock?: string | null
 }
 export type Books = Book[]
 

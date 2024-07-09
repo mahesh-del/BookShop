@@ -16,12 +16,13 @@ export class AdmindashboardComponent {
   books: any;
   displayModal: boolean = false;
   addBook = new FormGroup({
-    title: new FormControl('', Validators.required),
-    author: new FormControl(''),
-    genre: new FormControl(''),
-    price: new FormControl(''),
-    stock: new FormControl(''),
-    status: new FormControl('')
+    title: new FormControl('The Great Gatsby', Validators.required),
+    author: new FormControl('F. Scott Fitzgerald'),
+    genre: new FormControl('Literary Fiction'),
+    price: new FormControl('12.99'),
+    stock: new FormControl('30'),
+    status: new FormControl('Available')
+
   });
 
   ngOnInit() {
@@ -36,9 +37,12 @@ export class AdmindashboardComponent {
   hideDialog() {
     this.displayModal = false;
   }
-  submit()
-  {
-    console.log(this.addBook.value)
+  submit() {
+    this.booksApi.addBook(this.addBook.value).subscribe({
+      next:data=>alert(`${data},"Added Book Successfully"`),
+      error:err=>alert(err.error)
+    })
+    this.hideDialog()
   }
 
 }
