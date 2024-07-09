@@ -36,7 +36,7 @@
   <button type="button" pButton label="Add Book" icon="pi pi-external-link" (click)="showDialog()" class="btn btn-primary"></button>
   
 <section>
-    @for (item of books; track item.id) {
+    @for (item of books; track item.bookId) {
         <div class="book">
             {{item.title}}
         </div>
